@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Funko-Store-Front/static/css/main.3a140409.css",
-    "main.js": "/Funko-Store-Front/static/js/main.6bd3e54a.js",
+    "main.js": "/Funko-Store-Front/static/js/main.8750c909.js",
     "static/js/453.4cba6d11.chunk.js": "/Funko-Store-Front/static/js/453.4cba6d11.chunk.js",
     "static/media/Feature-Product-AstroBot.png": "/Funko-Store-Front/static/media/Feature-Product-AstroBot.4ed4cc0eb65f01d30a64.png",
     "static/media/BuddyBlade-B-Seahawks-Product-50977.png": "/Funko-Store-Front/static/media/BuddyBlade-B-Seahawks-Product-50977.32cf2bfa9b31e3afad5e.png",
@@ -21,11 +21,11 @@
     "static/media/star.svg": "/Funko-Store-Front/static/media/star.1d8ea56b7b420ed5a455f0cf748ca37d.svg",
     "index.html": "/Funko-Store-Front/index.html",
     "main.3a140409.css.map": "/Funko-Store-Front/static/css/main.3a140409.css.map",
-    "main.6bd3e54a.js.map": "/Funko-Store-Front/static/js/main.6bd3e54a.js.map",
+    "main.8750c909.js.map": "/Funko-Store-Front/static/js/main.8750c909.js.map",
     "453.4cba6d11.chunk.js.map": "/Funko-Store-Front/static/js/453.4cba6d11.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3a140409.css",
-    "static/js/main.6bd3e54a.js"
+    "static/js/main.8750c909.js"
   ]
 }
