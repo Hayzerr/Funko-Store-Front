@@ -18,12 +18,13 @@ import OrderPage from "./components/cart/OrderPage"
 
 function App() {
     return (
-        <Router>
+        <Router basename="/Funko-Store-Front">
             <div className="App min-h-screen flex flex-col">
                 <Header />
 
                 <main className="flex-grow bg-primary-white">
                     <Routes>
+                        <Route path="/" element={<MainPage />} />
                         <Route path="/main-page" element={<MainPage />} />
                         <Route path="/wishlist" element={<Wishlist />}></Route>
                         <Route
