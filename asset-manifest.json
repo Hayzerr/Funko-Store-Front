@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/Funko-Store-Front/static/css/main.3a140409.css",
+    "main.js": "/Funko-Store-Front/static/js/main.6bd3e54a.js",
+    "static/js/453.4cba6d11.chunk.js": "/Funko-Store-Front/static/js/453.4cba6d11.chunk.js",
+    "static/media/Feature-Product-AstroBot.png": "/Funko-Store-Front/static/media/Feature-Product-AstroBot.4ed4cc0eb65f01d30a64.png",
+    "static/media/BuddyBlade-B-Seahawks-Product-50977.png": "/Funko-Store-Front/static/media/BuddyBlade-B-Seahawks-Product-50977.32cf2bfa9b31e3afad5e.png",
+    "static/media/Feature-Holiday-GiftGuide-Logo.png": "/Funko-Store-Front/static/media/Feature-Holiday-GiftGuide-Logo.a0f14755b5fb8bb88a8d.png",
+    "static/media/BuddyBlade-A-DB-Product-83877.png": "/Funko-Store-Front/static/media/BuddyBlade-A-DB-Product-83877.a562a575487f7c591888.png",
+    "static/media/BuddyBlade-B-Seahawks-Background.jpg": "/Funko-Store-Front/static/media/BuddyBlade-B-Seahawks-Background.fda493f83ef2f5315d38.jpg",
+    "static/media/Belt-Banner-pop-chowder-Hero-exclusive-product.png": "/Funko-Store-Front/static/media/Belt-Banner-pop-chowder-Hero-exclusive-product.1422bbc855a2dc057cc8.png",
+    "static/media/gallery-blade-digitalpop-lp-pr.png": "/Funko-Store-Front/static/media/gallery-blade-digitalpop-lp-pr.1373b377bc39702a4917.png",
+    "static/media/gallery-blade-digitalpop-lp-hp.png": "/Funko-Store-Front/static/media/gallery-blade-digitalpop-lp-hp.0b4fb8bf8b0ee897875c.png",
+    "static/media/Feature-EOYClearance-Background-Mobile.jpeg": "/Funko-Store-Front/static/media/Feature-EOYClearance-Background-Mobile.77d0ce98196047828546.jpeg",
+    "static/media/gallery-blade-digitalpop-lp-tdk.png": "/Funko-Store-Front/static/media/gallery-blade-digitalpop-lp-tdk.c15068615ab18424d8b9.png",
+    "static/media/gallery-blade-digitalpop-lp-got.png": "/Funko-Store-Front/static/media/gallery-blade-digitalpop-lp-got.0c223fe4c491e9ac70a5.png",
+    "static/media/gallery-blade-digitalpop-lp-bttf.png": "/Funko-Store-Front/static/media/gallery-blade-digitalpop-lp-bttf.3a0d9707f2fca0d55728.png",
+    "static/media/gallery-blade-digitalpop-lp-tmnt-bebop.png": "/Funko-Store-Front/static/media/gallery-blade-digitalpop-lp-tmnt-bebop.a25d33d53b5b965b38a1.png",
+    "static/media/US_MobileBG_AstroBot.jpg": "/Funko-Store-Front/static/media/US_MobileBG_AstroBot.db18abfe54f0638c2bfa.jpg",
+    "static/media/BuddyBlade-A-DB-Background.jpg": "/Funko-Store-Front/static/media/BuddyBlade-A-DB-Background.6c8d0cc7f077a21fed28.jpg",
+    "static/media/star.svg": "/Funko-Store-Front/static/media/star.1d8ea56b7b420ed5a455f0cf748ca37d.svg",
+    "index.html": "/Funko-Store-Front/index.html",
+    "main.3a140409.css.map": "/Funko-Store-Front/static/css/main.3a140409.css.map",
+    "main.6bd3e54a.js.map": "/Funko-Store-Front/static/js/main.6bd3e54a.js.map",
+    "453.4cba6d11.chunk.js.map": "/Funko-Store-Front/static/js/453.4cba6d11.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a140409.css",
+    "static/js/main.6bd3e54a.js"
+  ]
+}
