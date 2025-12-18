@@ -1,0 +1,104 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.main-content {
+  z-index: 2;
+  position:relative;
+}
+
+.side-nav-button {
+  font-size: .9375rem;
+  text-transform: uppercase;
+}
+
+.col-12, .col-6 {
+  position: relative;
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border-radius: .1875rem;
+}
+
+.account-dashboard .account-dashboard-card {
+  border: 0;
+}
+
+.account-dashboard .dashboard-card-heading {
+  font-size: 1.625rem;
+  line-height: 1.07692;
+  color: #0f0f0f;
+  text-transform: uppercase;
+}
+
+.account-dashboard .edit-svg {
+  height: .9375rem;
+  width: .9375rem;
+}
+.svg-symbol {
+  width: 100%;
+  vertical-align: baseline;
+  display: inline-block;
+  fill: var(--skin-main-text-color-1);
+}
+
+.account-dashboard .account-dashboard-card .card-body, 
+.account-dashboard .account-dashboard-card .card-footer, 
+.account-dashboard .account-dashboard-card .card-header {
+  padding-left: 3.125rem;
+  padding-right: 3.125rem;
+}
+
+.row1 {
+  margin-bottom: 10px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
