@@ -1,2 +1,1 @@
-*.png filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
+# Images are no longer tracked by LFS to allow deploying build folder with actual binaries
