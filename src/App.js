@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Use Routes instead of Switch
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Authorization from "./components/Autorization";
@@ -8,17 +8,18 @@ import MyAccount from "./components/AccountMenu/MyAccount";
 import EditProfile from "./components/AccountMenu/EditProfile";
 import ChangePassword from "./components/ChangePassword";
 import MainPage from "./components/MainPage";
-import ProductPage from "./components/ProductPage"; // Ensure ProductPage is imported
+import ProductPage from "./components/ProductPage";
 import NotificationSettings from "./components/AccountMenu/NotificationSettings";
 import AddressBook from "./components/AccountMenu/AddressBook";
 import OrderHistory from "./components/AccountMenu/OrderHistory";
 import PreOrder from "./components/AccountMenu/PreOrder";
 import Cart from "./components/cart/Cart";
-import OrderPage from "./components/cart/OrderPage"
+import OrderPage from "./components/cart/OrderPage";
+import AdminPanel from "./components/AdminPanel";
 
 function App() {
     return (
-        <Router basename="/Funko-Store-Front">
+        <Router>
             <div className="App min-h-screen flex flex-col">
                 <Header />
 
@@ -57,6 +58,9 @@ function App() {
                         <Route path="/preorder" element={<PreOrder />} />
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/order" element={<OrderPage />} />
+
+                        {/* Admin Panel */}
+                        <Route path="/admin" element={<AdminPanel />} />
                     </Routes>
                 </main>
 

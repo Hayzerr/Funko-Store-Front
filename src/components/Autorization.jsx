@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '../hooks/useToast';
+import ToastContainer from './common/ToastContainer';
 
 const Authorization = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -11,89 +14,122 @@ const Authorization = () => {
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
 
+  const navigate = useNavigate();
+  const { toasts, showToast, removeToast } = useToast();
+
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      alert('User already logged in');
+      showToast('You are already logged in', 'info');
+      setTimeout(() => navigate('/main-page'), 1500);
     }
   }, []);
   const handleSubmit = async (e) => {
-	e.preventDefault();
-   
-	// Validation for registration passwords
-	if (!isLogin && password !== confirmPassword) {
-	  alert('Passwords do not match');
-	  return;
-	}
-   
-	try {
-	  if (isLogin) {
-	    // Login flow through query string
-	    const url = `https://funko-store.onrender.com/api/auth/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-   
-	    const response = await fetch(url, {
-		 method: 'POST',
-		 headers: {
-		   'Content-Type': 'application/json',
-		 },
-	    });
-   
-	    if (!response.ok) {
-		 const errorText = await response.text();
-		 throw new Error(errorText || 'Login failed');
-	    }
-   
-	    const data = await response.json();
-	    if (data.accessToken && data.refreshToken) {
-		 localStorage.setItem('accessToken', data.accessToken);
-		 localStorage.setItem('refreshToken', data.refreshToken);
-		 alert('Login successful!');
-	    } else {
-		 throw new Error('Invalid login response');
-	    }
-	  } else {
-	    // Registration flow
-	    const url = 'https://funko-store.onrender.com/api/auth/register';
-	    const registrationBody = {
-		 username,
-		 firstName,
-		 lastName,
-		 phone,
-		 address,
-		 email,
-		 password,
-	    };
-   
-	    const response = await fetch(url, {
-		 method: 'POST',
-		 headers: {
-		   'Content-Type': 'application/json',
-		 },
-		 body: JSON.stringify(registrationBody),
-	    });
-   
-	    if (!response.ok) {
-		 const errorText = await response.text();
-		 throw new Error(errorText || 'Registration failed');
-	    }
-   
-	    const data = await response.json();
-	    alert('Registration successful!');
-	    localStorage.setItem('userInfo', JSON.stringify(data)); // Save user data
-	  }
-	} catch (error) {
-	  console.error('Error:', error.message);
-	  alert(`Error: ${error.message}`);
-	}
-   };
-   
-   
+    e.preventDefault();
+
+    // Validation for registration passwords
+    if (!isLogin && password !== confirmPassword) {
+      showToast('Passwords do not match', 'error');
+      return;
+    }
+
+    try {
+      if (isLogin) {
+        // Login flow through query string
+        const url = `https://funko-store.onrender.com/api/auth/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(errorText || 'Login failed');
+        }
+
+        const data = await response.json();
+        if (data.accessToken && data.refreshToken) {
+          localStorage.setItem('accessToken', data.accessToken);
+          localStorage.setItem('refreshToken', data.refreshToken);
+          localStorage.setItem('username', username);
+          showToast('Login successful! Redirecting...', 'success');
+          setTimeout(() => navigate('/main-page'), 1500);
+        } else {
+          throw new Error('Invalid login response');
+        }
+      } else {
+        // Registration flow
+        const url = 'https://funko-store.onrender.com/api/auth/register';
+        const registrationBody = {
+          username,
+          firstName,
+          lastName,
+          phone,
+          address,
+          email,
+          password,
+        };
+
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(registrationBody),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(errorText || 'Registration failed');
+        }
+
+        const data = await response.json();
+        showToast('Registration successful! Please log in.', 'success');
+        localStorage.setItem('userInfo', JSON.stringify(data));
+
+        // Switch to login view after successful registration
+        setTimeout(() => {
+          setIsLogin(true);
+          setPassword('');
+          setConfirmPassword('');
+        }, 1500);
+      }
+    } catch (error) {
+      // VULNERABILITY 7: Detailed error messages exposing system information
+      console.error('🔓 Full error details:', {
+        message: error.message,
+        stack: error.stack,
+        username: username,
+        attemptedPassword: password,
+        timestamp: new Date(),
+        apiEndpoint: isLogin ? 'login' : 'register',
+      });
+
+      // VULNERABILITY 8: Exposing internal error details to user
+      showToast(`Error: ${error.message} | Stack: ${error.stack?.substring(0, 50)}...`, 'error');
+
+      // VULNERABILITY 9: Storing failed attempts
+      const failedAttempts = JSON.parse(localStorage.getItem('failedLoginAttempts') || '[]');
+      failedAttempts.push({
+        username,
+        password,
+        error: error.message,
+        timestamp: new Date().toISOString(),
+      });
+      localStorage.setItem('failedLoginAttempts', JSON.stringify(failedAttempts));
+    }
+  };
+
+
 
   const fetchProtectedData = async () => {
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {
-      alert('User is not logged in');
+      showToast('User is not logged in', 'error');
       return;
     }
 
@@ -112,10 +148,10 @@ const Authorization = () => {
       }
 
       const data = await response.json();
-      console.log(data); 
+      console.log(data);
     } catch (error) {
       console.error('Error:', error.message);
-      alert('Error fetching protected data');
+      showToast('Error fetching protected data', 'error');
     }
   };
 
@@ -123,7 +159,7 @@ const Authorization = () => {
     const refreshToken = localStorage.getItem('refreshToken');
 
     if (!refreshToken) {
-      alert('Refresh token not found');
+      showToast('Refresh token not found', 'error');
       return;
     }
 
@@ -143,19 +179,21 @@ const Authorization = () => {
 
       const data = await response.json();
       if (data.accessToken) {
-        localStorage.setItem('accessToken', data.accessToken); 
-        alert('Token refreshed successfully');
+        localStorage.setItem('accessToken', data.accessToken);
+        showToast('Token refreshed successfully', 'success');
       } else {
-        alert('Failed to refresh token');
+        showToast('Failed to refresh token', 'error');
       }
     } catch (error) {
       console.error('Error:', error.message);
-      alert('Error refreshing token');
+      showToast('Error refreshing token', 'error');
     }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <ToastContainer toasts={toasts} removeToast={removeToast} />
+
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-semibold text-center mb-6">
           {isLogin ? 'Login' : 'Register'}

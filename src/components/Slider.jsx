@@ -101,9 +101,8 @@ const Slider = () => {
                 {slides.map((_, index) => (
                     <button
                         key={index}
-                        className={`w-3 h-3 rounded-full ${
-                            index === currentIndex ? "bg-white" : "bg-gray-400"
-                        }`}
+                        className={`w-3 h-3 rounded-full ${index === currentIndex ? "bg-white" : "bg-gray-400"
+                            }`}
                         onClick={() => setCurrentIndex(index)}></button>
                 ))}
             </div>
