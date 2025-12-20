@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import AccountMenu from './AccountMenu';
 import MAccountMenu from "./MAccountMenu";
 import ProductCard from '../ProductCard';
+import { API_BASE_URL } from '../../config/apiConfig';
 import ProductModal from "../ProductModal";
 import axios from 'axios';
 
@@ -25,7 +26,7 @@ const Wishlist = () => {
   useEffect(() => {
     // Получение данных с API
     axios
-      .get('https://funko-store.onrender.com/api/wishlist', { headers })
+      .get(`${API_BASE_URL}/wishlist`, { headers })
       .then((response) => {
         setWishlist(response.data.wishlistItems); // Сохраняем данные о товарах
       })
@@ -37,11 +38,11 @@ const Wishlist = () => {
   // Удаление товара из Wishlist
   const removeFromWishlist = (id) => {
     axios
-      .delete(`https://funko-store.onrender.com/api/wishlist/remove/${id}`, { headers })
+      .delete(`${API_BASE_URL}/wishlist/remove/${id}`, { headers })
       .then(() => {
         // Обновляем состояние на странице "Wishlist"
         setWishlist((prevWishlist) => prevWishlist.filter(item => item.id !== id));
-  
+
         // Обновляем состояние в localStorage
         const storedFavorites = JSON.parse(localStorage.getItem('favoriteProducts')) || {};
         delete storedFavorites[id]; // Удаляем товар из localStorage
@@ -51,7 +52,7 @@ const Wishlist = () => {
         console.error("Error removing item from wishlist:", error);
       });
   };
-  
+
 
   const openModal = (product) => setSelectedProduct(product.id);
   const closeModal = () => setSelectedProduct(null);

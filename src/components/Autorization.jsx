@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../hooks/useToast';
 import ToastContainer from './common/ToastContainer';
+import { API_BASE_URL } from '../config/apiConfig';
 
 const Authorization = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -36,7 +37,7 @@ const Authorization = () => {
     try {
       if (isLogin) {
         // Login flow through query string
-        const url = `https://funko-store.onrender.com/api/auth/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+        const url = `${API_BASE_URL}/auth/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
 
         const response = await fetch(url, {
           method: 'POST',
@@ -62,7 +63,7 @@ const Authorization = () => {
         }
       } else {
         // Registration flow
-        const url = 'https://funko-store.onrender.com/api/auth/register';
+        const url = `${API_BASE_URL}/auth/register`;
         const registrationBody = {
           username,
           firstName,

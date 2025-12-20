@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/apiConfig';
 import ShippingProgress from './ShippingProgress';
 import Button from '../common/Button';
 
@@ -17,7 +18,7 @@ const CartSummary = ({ subtotal, shipping, estimatedTotal, shippingAddress }) =>
         return;
       }
 
-      const response = await fetch(`https://funko-store.onrender.com/api/orders?shippingAddress=${encodeURIComponent(shippingAddress)}`, {
+      const response = await fetch(`${API_BASE_URL}/orders?shippingAddress=${encodeURIComponent(shippingAddress)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });

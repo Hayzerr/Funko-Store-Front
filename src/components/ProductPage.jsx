@@ -4,7 +4,8 @@ import Red_heart from "../assets/red_heart.png"; // Red heart image
 import White_heart from "../assets/white_heart.png"; // White heart image
 import axios from "axios";
 import Button from "./common/Button";
-import { useParams } from "react-router-dom"; // Import useParams from React Router
+import { useParams } from "react-router-dom";
+import { API_BASE_URL } from "../config/apiConfig";
 
 const ProductPage = () => {
     const { category } = useParams(); // Get the category from the URL
@@ -25,7 +26,7 @@ const ProductPage = () => {
     const fetchProducts = (page) => {
         setLoading(true);
         axios
-            .get("https://funko-store.onrender.com/api/products", {
+            .get(`${API_BASE_URL}/products`, {
                 headers,
                 params: {
                     page: page,
@@ -66,8 +67,8 @@ const ProductPage = () => {
 
         const isFavorite = !favoriteProducts[productId];
         const apiEndpoint = isFavorite
-            ? `https://funko-store.onrender.com/api/wishlist/add/${productId}`
-            : `https://funko-store.onrender.com/api/wishlist/remove/${productId}`;
+            ? `${API_BASE_URL}/wishlist/add/${productId}`
+            : `${API_BASE_URL}/wishlist/remove/${productId}`;
         const method = isFavorite ? "POST" : "DELETE";
 
         axios

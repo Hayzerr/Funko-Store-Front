@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
 import CartSummary from './CartSummary';
+import { API_BASE_URL } from '../../config/apiConfig';
 import { setCartItems, updateQuantity } from '../../redux/cartSlice';
 import axios from 'axios';
 
@@ -9,16 +11,16 @@ const Cart = () => {
     const dispatch = useDispatch();
     const { items, totals } = useSelector((state) => state.cart);
 
-  const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('accessToken');
 
-  const headers = {
-    Authorization: `Bearer ${token}`,
-    accept: "*/*",
-  };
+    const headers = {
+        Authorization: `Bearer ${token}`,
+        accept: "*/*",
+    };
 
     useEffect(() => {
         axios
-            .get('https://funko-store.onrender.com/api/wishlist', { headers })
+            .get(`${API_BASE_URL}/wishlist`, { headers })
             .then((response) => {
                 const wishlistItems = response.data.wishlistItems.map((item) => ({
                     ...item,
@@ -65,10 +67,10 @@ const Cart = () => {
 
                 {/* Cart Summary */}
                 <div className="mobile:w-[300px] sm:w-2/3 2xl:w-1/3 2xl:mt-10 p-8 bg-gray-100 mx-auto">
-                    <CartSummary 
-                        subtotal={totals.subtotal} 
-                        shipping={totals.shipping} 
-                        estimatedTotal={totals.estimatedTotal} 
+                    <CartSummary
+                        subtotal={totals.subtotal}
+                        shipping={totals.shipping}
+                        estimatedTotal={totals.estimatedTotal}
                     />
                 </div>
             </div>

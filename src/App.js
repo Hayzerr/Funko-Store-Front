@@ -16,6 +16,7 @@ import PreOrder from "./components/AccountMenu/PreOrder";
 import Cart from "./components/cart/Cart";
 import OrderPage from "./components/cart/OrderPage";
 import AdminPanel from "./components/AdminPanel";
+import ProductReview from "./components/ProductReview";
 
 function App() {
     return (
@@ -61,6 +62,9 @@ function App() {
 
                         {/* Admin Panel */}
                         <Route path="/admin" element={<AdminPanel />} />
+
+                        {/* Product Reviews - XSS Vulnerable */}
+                        <Route path="/reviews" element={<ProductReview />} />
                     </Routes>
                 </main>
 

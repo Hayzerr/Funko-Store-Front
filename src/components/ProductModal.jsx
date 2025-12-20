@@ -66,12 +66,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RandomRec from './RandomRec';
+import { API_BASE_URL } from '../config/apiConfig';
 
-const ProductModal = ({ productId, onClose }) => {  
-  
+const ProductModal = ({ productId, onClose }) => {
+
   const [product, setProduct] = useState(null); // Для хранения данных о товаре
   const [randomRecommendations, setRandomRecommendations] = useState([]);
-  
+
   const token = localStorage.getItem('accessToken');
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -81,11 +82,11 @@ const ProductModal = ({ productId, onClose }) => {
   useEffect(() => {
     // Загружаем информацию о выбранном продукте по его id
     axios
-      .get(`https://funko-store.onrender.com/api/products/id/${productId}`, { headers })
+      .get(`${API_BASE_URL}/products/id/${productId}`, { headers })
       .then((response) => {
         setProduct(response.data); // Сохраняем данные о продукте
         console.log(response.data);
-        
+
       })
       .catch((error) => {
         console.error("Error fetching product data:", error);
@@ -93,7 +94,7 @@ const ProductModal = ({ productId, onClose }) => {
 
     // Генерируем случайные рекомендации
     axios
-      .get('https://funko-store.onrender.com/api/products', { headers })
+      .get(`${API_BASE_URL}/products`, { headers })
       .then((response) => {
         const randomRecs = response.data
           .sort(() => Math.random() - 0.5)

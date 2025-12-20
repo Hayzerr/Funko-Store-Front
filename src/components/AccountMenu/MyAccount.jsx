@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import ProductCard from '../ProductCard';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 const MyAccount = () => {
   const [profile, setProfile] = useState(null);
@@ -17,7 +18,7 @@ const MyAccount = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch('https://funko-store.onrender.com/api/users/profile', {
+        const response = await fetch(`${API_BASE_URL}/users/profile`, {
           method: 'GET',
           headers: {
             'Accept': 'application/json',
@@ -40,7 +41,7 @@ const MyAccount = () => {
 
     const fetchWishlist = async () => {
       try {
-        const response = await axios.get('https://funko-store.onrender.com/api/wishlist', { headers });
+        const response = await axios.get(`${API_BASE_URL}/wishlist`, { headers });
         setWishlist(response.data.wishlistItems || []);
       } catch (error) {
         console.log("Error fetching wishlist:", error);

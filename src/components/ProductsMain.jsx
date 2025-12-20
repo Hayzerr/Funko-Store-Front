@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import ProductCard from './ProductCard';
+import { API_BASE_URL } from '../config/apiConfig';
 import { Link, useNavigate } from "react-router-dom";
 import chowder from "../assets/Belt-Banner-pop-chowder-Hero-exclusive-product.png";
 import exclusive from "../assets/exclusive-badge.png";
@@ -13,7 +15,7 @@ const ProductsMain = () => {
     const fetchSportsProducts = async () => {
         try {
             const response = await fetch(
-                "https://funko-store.onrender.com/api/products?category=SPORTS&page=0&size=10"
+                `${API_BASE_URL}/products?category=SPORTS&page=0&size=10`
             );
             const data = await response.json();
 
