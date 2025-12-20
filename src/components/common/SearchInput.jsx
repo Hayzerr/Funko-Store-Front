@@ -29,7 +29,7 @@ const SearchInput = () => {
     setLoading(true);
     setError(null);
     try {
-      const url = `${API_BASE_URL}/products/search-vulnerable`;
+      const url = `${API_BASE_URL}/products/search`;
       console.log('🔍 Searching with URL:', url);
       console.log('🔍 Query:', query);
 

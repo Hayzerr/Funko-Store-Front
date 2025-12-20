@@ -22,7 +22,7 @@ export const API_ENDPOINTS = {
 
     // Product endpoints
     PRODUCTS: `${API_BASE_URL}/products`,
-    PRODUCTS_SEARCH: `${API_BASE_URL}/products/search-vulnerable`,
+    PRODUCTS_SEARCH: `${API_BASE_URL}/products/search`,
     PRODUCT_BY_ID: (id) => `${API_BASE_URL}/products/id/${id}`,
 
     // Wishlist endpoints

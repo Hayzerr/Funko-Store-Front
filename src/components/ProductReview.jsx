@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-// ⚠️ VULNERABILITY: Cross-Site Scripting (XSS) - FOR EDUCATIONAL PURPOSES ONLY
-// This component is intentionally vulnerable for security testing demonstration
-
 const ProductReview = ({ productId }) => {
     const [reviews, setReviews] = useState([
         {
@@ -45,7 +42,6 @@ const ProductReview = ({ productId }) => {
         <div className="product-reviews max-w-4xl mx-auto p-6">
             <h2 className="text-3xl font-bold mb-6">Customer Reviews</h2>
 
-            {/* Submit Review Form */}
             <div className="bg-white p-6 rounded-lg shadow-md mb-8">
                 <h3 className="text-xl font-semibold mb-4">Write a Review</h3>
                 <form onSubmit={handleSubmit}>
@@ -87,14 +83,11 @@ const ProductReview = ({ productId }) => {
                         <textarea
                             value={reviewText}
                             onChange={(e) => setReviewText(e.target.value)}
-                            placeholder="Write your review here... (HTML is supported)"
+                            placeholder="Write your review here..."
                             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black"
                             rows="4"
                             required
                         />
-                        <p className="text-sm text-gray-500 mt-1">
-                            ⚠️ Note: This form accepts HTML for demonstration purposes
-                        </p>
                     </div>
 
                     <button
@@ -106,7 +99,6 @@ const ProductReview = ({ productId }) => {
                 </form>
             </div>
 
-            {/* Display Reviews - VULNERABLE TO XSS */}
             <div className="reviews-list space-y-4">
                 <h3 className="text-2xl font-semibold mb-4">All Reviews ({reviews.length})</h3>
 
@@ -117,7 +109,6 @@ const ProductReview = ({ productId }) => {
                         <div key={review.id} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                             <div className="flex justify-between items-start mb-3">
                                 <div>
-                                    {/* VULNERABILITY: Rendering username without sanitization */}
                                     <div
                                         className="font-bold text-lg"
                                         dangerouslySetInnerHTML={{ __html: review.username }}
@@ -130,8 +121,6 @@ const ProductReview = ({ productId }) => {
                                 </div>
                             </div>
 
-                            {/* VULNERABILITY: Rendering review text without sanitization */}
-                            {/* This allows XSS attacks through script injection */}
                             <div
                                 className="mt-3 text-gray-700"
                                 dangerouslySetInnerHTML={{ __html: review.text }}
@@ -143,23 +132,6 @@ const ProductReview = ({ productId }) => {
                         </div>
                     ))
                 )}
-            </div>
-
-            {/* Warning Banner */}
-            <div className="mt-8 bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-                <div className="flex">
-                    <div className="flex-shrink-0">
-                        <svg className="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                        </svg>
-                    </div>
-                    <div className="ml-3">
-                        <p className="text-sm text-yellow-700">
-                            <strong>⚠️ Security Warning:</strong> This component contains an intentional XSS vulnerability for educational purposes.
-                            User input is rendered without sanitization using <code>dangerouslySetInnerHTML</code>.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     );

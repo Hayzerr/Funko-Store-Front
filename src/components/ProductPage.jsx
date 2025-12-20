@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ProductModal from "./ProductModal";
-import Red_heart from "../assets/red_heart.png"; // Red heart image
-import White_heart from "../assets/white_heart.png"; // White heart image
+import Red_heart from "../assets/red_heart.png";
+import White_heart from "../assets/white_heart.png";
 import axios from "axios";
 import Button from "./common/Button";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../config/apiConfig";
 
 const ProductPage = () => {
-    const { category } = useParams(); // Get the category from the URL
+    const { category } = useParams();
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]); // Store products
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [favoriteProducts, setFavoriteProducts] = useState({});
@@ -146,6 +147,12 @@ const ProductPage = () => {
                                     ${product.defaultPrice}
                                 </p>
                             </div>
+                            <button
+                                onClick={() => navigate('/reviews')}
+                                className="bg-black text-white px-3 py-1 rounded text-sm hover:bg-gray-800 transition"
+                            >
+                                Leave Review
+                            </button>
                         </div>
                     </div>
                 </div>
