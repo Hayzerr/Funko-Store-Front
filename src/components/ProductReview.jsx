@@ -21,13 +21,24 @@ const ProductReview = ({ productId }) => {
     const [username, setUsername] = useState('');
     const [rating, setRating] = useState(5);
 
+    // Input sanitization function
+    const sanitizeInput = (input) => {
+        return input
+            .replace(/<[^>]*>/g, '')
+            .replace(/[<>'"]/g, '')
+            .trim();
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const sanitizedUsername = sanitizeInput(username);
+        const sanitizedReviewText = sanitizeInput(reviewText);
+
         const newReview = {
             id: Date.now(),
-            username: username,
-            text: reviewText,
+            username: sanitizedUsername,
+            text: sanitizedReviewText,
             date: new Date().toLocaleDateString(),
             rating: rating
         };
@@ -56,6 +67,7 @@ const ProductReview = ({ productId }) => {
                             placeholder="Enter your name"
                             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black"
                             required
+                            maxLength={50}
                         />
                     </div>
 
@@ -87,6 +99,7 @@ const ProductReview = ({ productId }) => {
                             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black"
                             rows="4"
                             required
+                            maxLength={500}
                         />
                     </div>
 
@@ -109,10 +122,9 @@ const ProductReview = ({ productId }) => {
                         <div key={review.id} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                             <div className="flex justify-between items-start mb-3">
                                 <div>
-                                    <div
-                                        className="font-bold text-lg"
-                                        dangerouslySetInnerHTML={{ __html: review.username }}
-                                    />
+                                    <div className="font-bold text-lg">
+                                        {review.username}
+                                    </div>
                                     <div className="text-sm text-gray-500">{review.date}</div>
                                 </div>
                                 <div className="flex items-center">
@@ -121,10 +133,9 @@ const ProductReview = ({ productId }) => {
                                 </div>
                             </div>
 
-                            <div
-                                className="mt-3 text-gray-700"
-                                dangerouslySetInnerHTML={{ __html: review.text }}
-                            />
+                            <div className="mt-3 text-gray-700">
+                                {review.text}
+                            </div>
 
                             <div className="mt-4 text-xs text-gray-400">
                                 Review ID: {review.id}

@@ -63,7 +63,7 @@ function App() {
                         {/* Admin Panel */}
                         <Route path="/admin" element={<AdminPanel />} />
 
-                        {/* Product Reviews - XSS Vulnerable */}
+                        {/* Product Reviews*/}
                         <Route path="/reviews" element={<ProductReview />} />
                     </Routes>
                 </main>
